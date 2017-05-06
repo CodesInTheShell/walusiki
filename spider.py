@@ -6,16 +6,29 @@
 import requests
 from bs4 import BeautifulSoup
 
-print("Program running...")
-# ulr varies depending on your target
+#Printing a simple banner
+print("""
+#############################################
+# This program is a part of walusiki project.
+# Feel free to use and modify the code.
+#
+#                 by: CITS
+#############################################
+""")
+
+# url varies depending on your target
 url = 'http://192.168.142.128/mutillidae/'
-#header={'user-agent':'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1'}
+#adding header for the request to became a bit anonymous
+head = {'user-agent':'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1'}
 
 links_list = []
 crawled_links = []
 
+print("Program running...")
+print("Crawling " + url + " Domain")
+
 #Browse the target website
-r = requests.get(url)
+r = requests.get(url, headers=head)
 
 #Parse the response
 soup = BeautifulSoup(r.content,"html.parser")
@@ -47,8 +60,6 @@ for l in links_list:
 sorted_crawled_links = set(crawled_links)
 print("\n")
 print("There are " + str(len(sorted_crawled_links)) + " links on " + url + " domain.")
-print("\n")
-print("\n")
 print("Here are the pages: \n")
 
 #Printing
